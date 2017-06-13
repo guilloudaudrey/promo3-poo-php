@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-    include_once './Personne.php';
-    ?>
-    <form action="personne.php" method="POST">
+
+    <form action="#" method="POST">
         <label for="nom">Nom</label>
         <input type="text" name="nom"/>
         <label for="prenom">Prénom</label>
@@ -39,7 +38,21 @@
                 <option value="mayotte">Mayotte</option>
                     </select>
 
-        <button>Envoyer</button>
+        <button name="create">Envoyer</button>
+        
+             <?php
+   
+    if(isset($_POST['create'])){
+        $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        //on include la page Personne.php où se trouve notre classe Personne
+        //cette étape ne sera plus nécessaire lorsqu'on utilisera les namespaces
+         include_once './Personne.php';
+        $instancePersonne = new Personne($post['nom'], $post['prenom'], $post['age'], $post['region']);
+        echo'<pre>';
+    var_dump($instancePersonne);
+    echo '</pre>';
+    }
+    ?>
 
     </form>
     
